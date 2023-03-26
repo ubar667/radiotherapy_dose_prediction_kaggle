@@ -1,3 +1,8 @@
+#Challenge data
+challenge_data/*
+submissions/*
+models_ckpt/*
+pytorch_wavelets/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
