@@ -11,12 +11,9 @@ def submit(model, dataset, dir="submissions", name="toy", pad=nn.ZeroPad2d((24,2
     file_paths = []
     dataset.test = True
     print(f"*** save .npy samples")
-    err = 0
-    max_l = []
-    min_l = []
+
     
     m = []
-    std = []
     for sample in tqdm(dataset):
         test_in = [sample["input"][0].cuda(), sample["input"][1].cuda()]
         out = model(test_in)
@@ -27,12 +24,6 @@ def submit(model, dataset, dir="submissions", name="toy", pad=nn.ZeroPad2d((24,2
         out = torch_to_numpy(out[0].cpu().detach()).squeeze()
 
         file_path = os.path.join(dir, sample['sample_name'][0]+'.npy')
-        sub_path = os.path.join("submissions", "submission", sample['sample_name'][0]+'.npy')
-        im = np.load(sub_path)#[...,None]
-        
-        ct = torch_to_numpy(sample["ct"])
-        ct = ct[ct>0.]
-        
         
         np.save(file_path, out)
         
